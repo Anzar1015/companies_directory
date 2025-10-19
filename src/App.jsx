@@ -88,35 +88,6 @@ export default function App() {
             companies={paginated}
             loading={companies.length === 0}
           />
-
-          {/* <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-3">
-            <div className="text-sm text-gray-600">
-              Showing <span className="font-semibold">{paginated.length}</span> of{" "}
-              <span className="font-semibold">{filtered.length}</span> results
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                className="px-3 py-1 rounded bg-blue-100 cursor-pointer hover:bg-blue-200 text-blue-700 border border-blue-200 disabled:opacity-50"
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page === 1}
-              >
-                Prev
-              </button>
-
-              <div className="text-sm font-medium">
-                Page {page} / {totalPages}
-              </div>
-
-              <button
-                className="px-3 py-1 rounded bg-blue-100 cursor-pointer hover:bg-blue-200 text-blue-700 border border-blue-200 disabled:opacity-50"
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                disabled={page === totalPages}
-              >
-                Next
-              </button>
-            </div>
-          </div> */}
           <Pagination
             page={page}
             totalPages={totalPages}
