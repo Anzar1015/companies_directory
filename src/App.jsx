@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import companiesData from "./data/companies.json";
 import CompanyTable from "./Components/CompanyTable";
 import Filters from "./Components/Filters";
+import Pagination from "./Components/Pagination";
 
 export default function App() {
   const [companies, setCompanies] = useState([]);
@@ -30,19 +31,20 @@ export default function App() {
     if (query.trim()) {
       const q = query.toLowerCase();
       list = list.filter((c) =>
-        (c.name + " " + c.industry + " " + c.location)
-          .toLowerCase()
-          .includes(q)
+        (c.name + " " + c.industry + " " + c.location).toLowerCase().includes(q)
       );
     }
     if (industry) list = list.filter((c) => c.industry === industry);
     if (location) list = list.filter((c) => c.location === location);
 
-    if (sortBy === "name-asc") list.sort((a, b) => a.name.localeCompare(b.name));
+    if (sortBy === "name-asc")
+      list.sort((a, b) => a.name.localeCompare(b.name));
     else if (sortBy === "name-desc")
       list.sort((a, b) => b.name.localeCompare(a.name));
-    else if (sortBy === "employees-asc") list.sort((a, b) => a.employees - b.employees);
-    else if (sortBy === "employees-desc") list.sort((a, b) => b.employees - a.employees);
+    else if (sortBy === "employees-asc")
+      list.sort((a, b) => a.employees - b.employees);
+    else if (sortBy === "employees-desc")
+      list.sort((a, b) => b.employees - a.employees);
 
     return list;
   }, [companies, query, industry, location, sortBy]);
@@ -57,7 +59,9 @@ export default function App() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-10">
       <div className="container mx-auto px-4 max-w-6xl">
         <header className="mb-6 text-center">
-          <h1 className="text-3xl font-bold text-blue-700">Companies Directory</h1>
+          <h1 className="text-3xl font-bold text-blue-700">
+            Companies Directory
+          </h1>
         </header>
 
         <Filters
@@ -80,9 +84,12 @@ export default function App() {
         />
 
         <main className="mt-8">
-          <CompanyTable companies={paginated} loading={companies.length === 0} />
+          <CompanyTable
+            companies={paginated}
+            loading={companies.length === 0}
+          />
 
-          <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-3">
+          {/* <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-3">
             <div className="text-sm text-gray-600">
               Showing <span className="font-semibold">{paginated.length}</span> of{" "}
               <span className="font-semibold">{filtered.length}</span> results
@@ -109,7 +116,12 @@ export default function App() {
                 Next
               </button>
             </div>
-          </div>
+          </div> */}
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={(newPage) => setPage(newPage)}
+          />
         </main>
       </div>
     </div>
