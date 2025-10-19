@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import companiesData from "./data/companies.json";
-import CompanyTable from "./components/CompanyTable";
-import Filters from "./components/Filters";
+import CompanyTable from "./Components/CompanyTable";
+import Filters from "./Components/Filters";
 
 export default function App() {
   const [companies, setCompanies] = useState([]);
